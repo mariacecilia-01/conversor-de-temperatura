@@ -1,8 +1,10 @@
 package br.senai.sp.conversor_de_temperatura.gui;
 
+//imports para formatação do texto
 import java.awt.Color;
 import java.awt.Font;
 
+//imports para tela grafica
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,7 +25,7 @@ public class TelaConversor {
 		
 		//formatação de tela
 		JFrame tela = new JFrame();
-		tela.setSize(500, 525);
+		tela.setSize(500, 500);
 		tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		tela.setTitle("Conversor de Temperatura");
 		tela.setLocationRelativeTo(null);
@@ -58,7 +60,7 @@ public class TelaConversor {
 		lblResultado.setFont(new Font("Arial", Font.BOLD,20));
 				
 		
-		 //ação para o botão Kelvin
+		 //ação para o botão Kelvin funcionar
         buttonKelvin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -66,6 +68,7 @@ public class TelaConversor {
                     double celsius = Double.parseDouble(textCelsius.getText());
                     double kelvin = celsius + 273.15;
                     lblResultado.setText(String.valueOf(kelvin + " KELVIN"));
+                  //formatação do texto
                 } catch (NumberFormatException e2) {
                     lblResultado.setText("Insira um valor válido!");
                     lblResultado.setForeground(Color.red);
@@ -74,7 +77,7 @@ public class TelaConversor {
             }
         });
         
-        //ação para o botão Fahreinheit
+        //ação para o botão Fahreinheit funcionar
         buttonFahreinheit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -82,6 +85,7 @@ public class TelaConversor {
                     double celsius = Double.parseDouble(textCelsius.getText());
                     double fahreinheit = celsius * 1.8 + 32;
                     lblResultado.setText(String.valueOf(fahreinheit + " FAHREINHEIT"));
+                    //formatação do texto
                 } catch (NumberFormatException e2) {
                     lblResultado.setText("Insira um valor válido!");
                     lblResultado.setForeground(Color.red);
@@ -90,14 +94,14 @@ public class TelaConversor {
             }
         });
 		
-		
+		//recurso para itens aparecerem na tela
 		tela.getContentPane().add(textCelsius);
 		tela.getContentPane().add(lblCelsius);
 		tela.getContentPane().add(buttonKelvin);
 		tela.getContentPane().add(buttonFahreinheit);
 		tela.getContentPane().add(lblResultado);
 		
-		
+		//função para tela funcionar
 		tela.setVisible(true);
 	}
 }

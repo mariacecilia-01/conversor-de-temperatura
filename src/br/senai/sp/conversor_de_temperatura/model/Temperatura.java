@@ -21,6 +21,7 @@ private double celsius;
 	
 	}
 	
+	//conversão para fahreinheit
 	public double converterParaFahreinheit() {
 		double conversaoFahreinheit = (celsius * 1.8) + 32;
 		return conversaoFahreinheit;
