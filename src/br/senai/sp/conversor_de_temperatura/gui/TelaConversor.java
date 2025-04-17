@@ -9,6 +9,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import br.senai.sp.conversor_de_temperatura.model.Temperatura;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -58,21 +61,30 @@ public class TelaConversor {
 		lblResultado = new JLabel();
 		lblResultado.setBounds(165,150,360, 100);
 		lblResultado.setFont(new Font("Arial", Font.BOLD,20));
+		
+		//mensagem de erro
+		lblMensagemErro = new JLabel();
+		lblMensagemErro.setBounds(150, 180, 360, 100);
+		lblMensagemErro.setForeground(Color.red);
+        lblMensagemErro.setFont(new Font("Arial", Font.BOLD,16));
 				
 		
 		 //ação para o botão Kelvin funcionar
         buttonKelvin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+            	String txtCelsius = textCelsius.getText();
                 try {
-                    double celsius = Double.parseDouble(textCelsius.getText());
-                    double kelvin = celsius + 273.15;
-                    lblResultado.setText(String.valueOf(kelvin + " KELVIN"));
+                    double celsius = Double.parseDouble(txtCelsius);
+                    
+                    Temperatura kelvin = new Temperatura();
+                    kelvin.setCelsius(celsius);
+                    celsius = kelvin.converterParaKelvin();
+                    lblResultado.setText(celsius + "KELVIN");
                   //formatação do texto
                 } catch (NumberFormatException e2) {
-                    lblResultado.setText("Insira um valor válido!");
-                    lblResultado.setForeground(Color.red);
-                    lblResultado.setFont(new Font("Arial", Font.BOLD,16));
+                    lblMensagemErro.setText("Insira um valor válido!");
+                    
                 }
             }
         });
@@ -81,15 +93,17 @@ public class TelaConversor {
         buttonFahreinheit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+            	String txtCelsius = textCelsius.getText();
                 try {
-                    double celsius = Double.parseDouble(textCelsius.getText());
-                    double fahreinheit = celsius * 1.8 + 32;
-                    lblResultado.setText(String.valueOf(fahreinheit + " FAHREINHEIT"));
+                    double celsius = Double.parseDouble(txtCelsius);
+
+                    Temperatura fahreinheit = new Temperatura();
+                    celsius = fahreinheit.converterParaFahreinheit();
+                    lblResultado.setText(celsius +"FAREHINHEIT");
                     //formatação do texto
                 } catch (NumberFormatException e2) {
-                    lblResultado.setText("Insira um valor válido!");
-                    lblResultado.setForeground(Color.red);
-                    lblResultado.setFont(new Font("Arial", Font.BOLD,16));
+                    lblMensagemErro.setText("Insira um valor válido!");
+                    
                 }
             }
         });
@@ -100,6 +114,7 @@ public class TelaConversor {
 		tela.getContentPane().add(buttonKelvin);
 		tela.getContentPane().add(buttonFahreinheit);
 		tela.getContentPane().add(lblResultado);
+		tela.getContentPane().add(lblMensagemErro);
 		
 		//função para tela funcionar
 		tela.setVisible(true);
