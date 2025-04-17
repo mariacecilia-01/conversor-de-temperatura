@@ -31,6 +31,4 @@ private double celsius;
 
 
 
-
-
 }
